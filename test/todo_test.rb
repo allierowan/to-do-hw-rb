@@ -9,4 +9,10 @@ class ToDoTest < Minitest::Test
     groceries = ToDo.new(description: "Buy groceries", is_complete: false)
     assert groceries.save
   end
+
+  def test_to_do_belongs_to_list
+    groceries = ToDo.create!(description: "Buy groceries", is_complete: false)
+    household = List.create!(name: "Household Items", to_dos: [groceries])
+    assert_equal household, groceries.list
+  end
 end
