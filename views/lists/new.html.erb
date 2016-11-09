@@ -1,0 +1,10 @@
+<ul>
+  <% @list.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+<form action="/lists" method="post">
+  List Name:
+  <input type="text" name="name" value="<%= @list.name %>">
+  <input type="submit" value="Save">
+</form>
