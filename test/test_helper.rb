@@ -17,3 +17,12 @@ begin
 rescue ActiveRecord::StatementInvalid
 end
 CreateToDosTableMigration.migrate(:up)
+
+require "./list"
+require "./db/migrations/create_lists_table_migration"
+
+begin
+  CreateListsTableMigration.migrate(:down)
+rescue ActiveRecord::StatementInvalid
+end
+CreateListsTableMigration.migrate(:up)
