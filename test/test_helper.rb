@@ -9,7 +9,7 @@ ActiveRecord::Base.establish_connection(
   database: "db/test.sqlite3"
 )
 
-require "./todo"
+require "./to_do"
 require "./db/migrations/create_to_dos_table_migration"
 
 begin
