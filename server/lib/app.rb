@@ -27,8 +27,13 @@ class App < Sinatra::Base
 
   get "/lists/:id" do
     @list = List.find(params["id"])
-    @todo = @list.to_dos.build
+    @todo = ToDo.new(list: @list)
     erb :"lists/show.html", layout: :"layout/application.html"
+  end
+
+  delete "/lists/:id" do
+    List.find(params["id"]).destroy
+    redirect "/lists"
   end
 
   post "/todos" do

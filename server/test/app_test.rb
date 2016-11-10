@@ -54,4 +54,18 @@ class AppTest < Minitest::Test
     patch "/todos/#{apple.id}", "todo" => { is_complete: true }
     assert ToDo.last.is_complete
   end
+
+  def test_delete_to_do_item
+    groceries = List.create!(name: "Groceries")
+    apple = groceries.to_dos.build(description: "Apple")
+    apple.save
+    delete "/todos/#{apple.id}"
+    refute ToDo.find_by(id: apple.id)
+  end
+
+  def test_delete_list
+    groceries = List.create!(name: "Groceries")
+    delete "/lists/#{groceries.id}"
+    refute List.find_by(id: groceries.id)
+  end
 end

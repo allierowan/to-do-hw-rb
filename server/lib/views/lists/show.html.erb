@@ -1,3 +1,4 @@
+<h1><%= @list.name %></h1>
 <table class="table">
   <tr>
     <th>
@@ -14,7 +15,8 @@
     <td>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
-        <input type="checkbox" checked autocomplete="on" name="todo[is_complete]" value="<%= to_do.is_complete %>">
+        <input type="hidden" name="todo[is_complete]" value="<%= to_do.is_complete %>">
+        <input type="submit" value="Complete">
     </td>
     <td>
       <%= to_do.description %>
