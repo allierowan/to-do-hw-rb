@@ -4,20 +4,50 @@ require "sinatra"
 require_relative "database"
 require_relative "../dependencies"
 
-get "/" do
-  erb :"home/index.html", layout: :"layout/application.html"
-end
+class App < Sinatra::Base
+  set :method_override, true
 
-get "/lists" do
-  @lists = List.all
-  erb :"lists/index.html", layout: :"layout/application.html"
-end
+  get "/" do
+    erb :"home/index.html", layout: :"layout/application.html"
+  end
 
-post "/lists" do
-  @list = List.new(params)
-  if @list.save
-    redirect "/lists"
-  else
-    erb :"lists/new.html", layout: :"layout/application.html"
+  get "/lists" do
+    @lists = List.all
+    erb :"lists/index.html", layout: :"layout/application.html"
+  end
+
+  post "/lists" do
+    @list = List.new(params)
+    if @list.save
+      redirect "/lists"
+    else
+      erb :"lists/new.html", layout: :"layout/application.html"
+    end
+  end
+
+  get "/lists/:id" do
+    @list = List.find(params["id"])
+    @todo = @list.to_dos.build
+    erb :"lists/show.html", layout: :"layout/application.html"
+  end
+
+  post "/todos" do
+    @todo = ToDo.new(params["todo"])
+    if @todo.save
+      redirect "/lists/#{@todo.list_id}"
+    else
+      erb :"todos/new.html", layout: :"layout/application.html"
+    end
+  end
+
+  patch "/todos/:id" do
+    @todo = ToDo.find(params["id"])
+    @todo.update(params["todo"])
+    redirect "/lists/#{@todo.list_id}"
+  end
+
+  delete "/todos/:id" do
+    ToDo.find(params["id"]).destroy
+    redirect "/lists/#{params['list_id']}"
   end
 end

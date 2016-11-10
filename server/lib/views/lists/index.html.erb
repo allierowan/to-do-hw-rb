@@ -2,12 +2,12 @@
 <ul class="lists">
   <% @lists.each do |list| %>
   <li>
-    <a href="/lists/<%=list.name%>"><%= list.name %></a>
+    <a href="/lists/<%=list.id%>"><%= list.name %></a>
   </li>
   <% end %>
 </ul>
 <form action="/lists" method="post">
-  List Name:
-  <input type="text" name="name" value="">
+  <label for="list_name">List Name</label>
+  <input id="list_name" type="text" name="name" value="">
   <input type="submit" value="Save">
 </form>

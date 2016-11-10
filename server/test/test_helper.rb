@@ -1,28 +1,15 @@
+ENV["RACK_ENV"] = "test"
+
+require "bundler/setup"
+
+begin
+  require "pry"
+rescue LoadError
+end
+
 require "minitest/autorun"
 require "minitest/pride"
+require "minitest/focus"
+require "rack/test"
 
-require "active_record"
-require "pry"
-
-ActiveRecord::Base.establish_connection(
-  adapter: "sqlite3",
-  database: "db/test.sqlite3"
-)
-
-require "./to_do"
-require "./db/migrations/create_to_dos_table_migration"
-
-begin
-  CreateToDosTableMigration.migrate(:down)
-rescue ActiveRecord::StatementInvalid
-end
-CreateToDosTableMigration.migrate(:up)
-
-require "./list"
-require "./db/migrations/create_lists_table_migration"
-
-begin
-  CreateListsTableMigration.migrate(:down)
-rescue ActiveRecord::StatementInvalid
-end
-CreateListsTableMigration.migrate(:up)
+require_relative "../lib/app"

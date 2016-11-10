@@ -1,0 +1,45 @@
+<table class="table">
+  <tr>
+    <th>
+      Complete
+    </th>
+    <th>
+      Description
+    </th>
+    <th>
+    </th>
+  </tr>
+  <% @list.active_todos.each do |to_do| %>
+  <tr>
+    <td>
+      <form action="/todos/<%= to_do.id %>" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <input type="checkbox" checked autocomplete="on" name="todo[is_complete]" value="<%= to_do.is_complete %>">
+    </td>
+    <td>
+      <%= to_do.description %>
+    </td>
+    <td>
+      <form action="/todos/<%= to_do.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="list_id" value="<%= @list.id %>">
+        <input type="submit" value="Delete">
+      </form>
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <td>
+      <form action="/todos" method="post">
+        <label for="todo_description">To Do</label>
+        <input id="todo_description" type="text" name="todo[description]" value="<%= @todo.description %>">
+        <input type="hidden" name="todo[list_id]" value="<%= @list.id %>">
+        <input type="submit" value="Save">
+      </form>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
