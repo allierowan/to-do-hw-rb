@@ -47,12 +47,18 @@ class App < Sinatra::Base
 
   patch "/todos/:id" do
     @todo = ToDo.find(params["id"])
-    @todo.update(params["todo"])
+    @todo.update!(params["todo"])
     redirect "/lists/#{@todo.list_id}"
   end
 
   delete "/todos/:id" do
     ToDo.find(params["id"]).destroy
     redirect "/lists/#{params['list_id']}"
+  end
+
+  get "/lists/:id/all" do
+    @list = List.find(params["id"])
+    @todo = ToDo.new(list: @list)
+    erb :"lists/show_all.html", layout: :"layout/application.html"
   end
 end

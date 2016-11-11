@@ -32,7 +32,7 @@ class AppTest < Minitest::Test
     assert_match(/Name can\'t be blank/, last_response.body)
   end
 
-  def test_get_lists_to_dos
+  def test_get_lists_active_to_dos
     groceries = List.create!(name: "Groceries")
     groceries.to_dos.build(description: "Apples")
     groceries.save!
@@ -67,5 +67,13 @@ class AppTest < Minitest::Test
     groceries = List.create!(name: "Groceries")
     delete "/lists/#{groceries.id}"
     refute List.find_by(id: groceries.id)
+  end
+
+  def test_get_all_todos
+    apple = ToDo.create!(description: "Apples")
+    orange = ToDo.create!(description: "Orange", is_complete: true)
+    List.create!(name: "Groceries", to_dos: [apple, orange])
+    get "/lists/#{List.last.id}/all"
+    assert_match(/Orange/, last_response.body)
   end
 end

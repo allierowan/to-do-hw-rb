@@ -10,14 +10,17 @@
     <th>
     </th>
   </tr>
-  <% @list.active_todos.each do |to_do| %>
+  <% @list.to_dos.each do |to_do| %>
   <tr>
     <td>
+      <% if to_do.is_complete %>
+      <span class="complete">Done!</span>
+      <% else %>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="todo[is_complete]" value="<%= true %>">
+        <input type="hidden" name="todo[is_cosmplete]" value="<%= to_do.is_complete %>">
         <input type="submit" value="Complete">
-      </form>
+      <% end %>
     </td>
     <td>
       <%= to_do.description %>
@@ -40,7 +43,7 @@
         <input type="submit" value="Save">
       </form>
     </td>
-    <a href="/lists/<%= @list.id %>/all">See all</a>
+      <a href="/lists/<%= @list.id %>">See active</a>
     <td>
     </td>
     <td>

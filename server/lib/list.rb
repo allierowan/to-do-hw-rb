@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  has_many :to_dos
+  has_many :to_dos, dependent: :destroy
   validates :name, presence: :true
 
   def active_todos

@@ -1,11 +1,24 @@
 <h2>Your Lists</h2>
-<ul class="lists">
+<table class="table">
+  <th>
+    List Name
+  </th>
+  <th>
+  </th>
   <% @lists.each do |list| %>
-  <li>
-    <a href="/lists/<%=list.id%>"><%= list.name %></a>
-  </li>
+  <tr>
+    <td>
+      <a href="/lists/<%=list.id%>"><%= list.name %></a>
+    </td>
+    <td>
+      <form action="/lists/<%= list.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
+    </td>
+  </tr>
   <% end %>
-</ul>
+</table>
 <form action="/lists" method="post">
   <label for="list_name">List Name</label>
   <input id="list_name" type="text" name="name" value="">
