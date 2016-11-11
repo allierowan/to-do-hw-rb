@@ -45,6 +45,17 @@ class App < Sinatra::Base
     end
   end
 
+  get "/todos" do
+    @todos = ToDo.all.select { |todo| !todo.is_complete }
+    erb :"todos/index.html", layout: :"layout/application.html"
+  end
+
+  get "/all/todos" do
+    @todos = ToDo.all
+    @all = true
+    erb :"todos/index.html", layout: :"layout/application.html"
+  end
+
   get "/todos/:id" do
     @todo = ToDo.find(params["id"])
     erb :"todos/show.html", layout: :"layout/application.html"
@@ -52,14 +63,16 @@ class App < Sinatra::Base
 
   patch "/todos/:id" do
     @todo = ToDo.find(params["id"])
+    @todo.mark_complete! if params["todo"]["is_complete"]
     @todo.update!(params["todo"])
     redirect "/lists/#{@todo.list_id}"
   end
 
   patch "/todos/all/:id" do
     @todo = ToDo.find(params["id"])
+    @todo.mark_complete! if params["todo"]["is_complete"]
     @todo.update!(params["todo"])
-    redirect "/todos"
+    redirect "/all/todos"
   end
 
   delete "/todos/:id" do
@@ -71,10 +84,5 @@ class App < Sinatra::Base
     @list = List.find(params["id"])
     @todo = ToDo.new(list: @list)
     erb :"lists/show_all.html", layout: :"layout/application.html"
-  end
-
-  get "/todos" do
-    @todos = ToDo.all.select { |todo| !todo.is_complete }
-    erb :"todos/index.html", layout: :"layout/application.html"
   end
 end

@@ -20,7 +20,7 @@ desc "Generate migration"
 namespace :generate do
   task :migration do |name|
     name = ARGV.pop.classify
-    timenumber = Time.now.strftime.getlocal "%Y%m%d%H%M%S"
+    timenumber = Time.now.strftime "%Y%m%d%H%M%S"
     file = "db/migrations/#{timenumber}_#{name.snake_case}_migration.rb"
 
     File.open file, "w" do |f|

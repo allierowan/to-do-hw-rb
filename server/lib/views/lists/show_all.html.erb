@@ -14,7 +14,7 @@
   <tr>
     <td>
       <% if to_do.is_complete %>
-      <span class="complete">Done!</span>
+      <span class="complete">Completed on <%= to_do.completed_at.strftime "%A, %d %b %Y %l:%M %p" %></span>
       <% else %>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
@@ -39,6 +39,10 @@
       <form action="/todos" method="post">
         <label for="todo_description">To Do</label>
         <input id="todo_description" type="text" name="todo[description]" value="<%= @todo.description %>">
+
+        <label for="todo_description">Due Date</label>
+        <input id="todo_description" type="date" name="todo[due_at]" value="<%= @todo.due_at %>">
+
         <input type="hidden" name="todo[list_id]" value="<%= @list.id %>">
         <input type="submit" value="Save">
       </form>
