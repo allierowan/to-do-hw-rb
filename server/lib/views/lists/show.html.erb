@@ -18,7 +18,7 @@
       <% else %>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="todo[is_cosmplete]" value="<%= to_do.is_complete %>">
+        <input type="hidden" name="todo[is_cosmplete]" value="<%= true %>">
         <input type="submit" value="Complete">
       <% end %>
     </td>
