@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110134050) do
+ActiveRecord::Schema.define(version: 20161111145657) do
 
   create_table "lists", force: :cascade do |t|
     t.string   "name"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20161110134050) do
 
   create_table "to_dos", force: :cascade do |t|
     t.text     "description"
-    t.boolean  "is_complete", default: false
+    t.boolean  "is_complete",  default: false
     t.integer  "list_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.datetime "completed_at"
+    t.datetime "due_at"
   end
 
 end

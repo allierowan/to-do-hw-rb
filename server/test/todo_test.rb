@@ -15,4 +15,10 @@ class ToDoTest < Minitest::Test
     household = List.create!(name: "Household Items", to_dos: [groceries])
     assert_equal household, groceries.list
   end
+
+  def test_completing_to_do_changes_completed_time
+    groceries = ToDo.create!(description: "Buy groceries", is_complete: false)
+    groceries.mark_complete!
+    assert groceries.completed_at
+  end
 end
