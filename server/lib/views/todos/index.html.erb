@@ -1,23 +1,27 @@
-<h1><%= @list.name %></h1>
+<h1>All To Dos</h1>
 <table class="table">
   <tr>
     <th>
       Complete
     </th>
     <th>
-      Description
+      List Name
     </th>
     <th>
+      Description
     </th>
   </tr>
-  <% @list.active_todos.each do |to_do| %>
+  <% @todos.each do |to_do| %>
   <tr>
     <td>
-      <form action="/todos/<%= to_do.id %>" method="post">
+      <form action="/todos/all/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="todo[is_complete]" value="<%= true %>">
         <input type="submit" value="Complete">
       </form>
+    </td>
+    <td>
+      <a href="lists/<%= to_do.list_id %>"><%= to_do.list.name %></a>
     </td>
     <td>
       <a href="/todos/<%= to_do.id %>"><%= to_do.description %></a>
@@ -25,7 +29,7 @@
     <td>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="list_id" value="<%= @list.id %>">
+        <input type="hidden" name="list_id" value="<%= to_do.list_id %>">
         <input type="submit" value="Delete">
       </form>
     </td>
@@ -33,14 +37,9 @@
   <% end %>
   <tr>
     <td>
-      <form action="/todos" method="post">
-        <label for="todo_description">To Do</label>
-        <input id="todo_description" type="text" name="todo[description]" value="<%= @todo.description %>">
-        <input type="hidden" name="todo[list_id]" value="<%= @list.id %>">
-        <input type="submit" value="Save">
-      </form>
     </td>
-    <a href="/lists/<%= @list.id %>/all">See all</a>
+    <td>
+    </td>
     <td>
     </td>
     <td>

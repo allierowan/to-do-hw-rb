@@ -23,7 +23,7 @@
       <% end %>
     </td>
     <td>
-      <%= to_do.description %>
+      <a href="/todos/<%= to_do.id %>"><%= to_do.description %></a>
     </td>
     <td>
       <form action="/todos/<%= to_do.id %>" method="post">

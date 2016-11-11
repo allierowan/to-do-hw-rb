@@ -76,4 +76,21 @@ class AppTest < Minitest::Test
     get "/lists/#{List.last.id}/all"
     assert_match(/Orange/, last_response.body)
   end
+
+  def test_get_all_todos_all_lists
+    apple = ToDo.create!(description: "Apples")
+    orange = ToDo.create!(description: "Orange")
+    List.create!(name: "Groceries", to_dos: [apple])
+    List.create!(name: "Groceries2", to_dos: [orange])
+    get "/todos"
+    assert_match(/Apples/, last_response.body)
+    assert_match(/Orange/, last_response.body)
+    assert_match(/Groceries/, last_response.body)
+  end
+
+  def test_show_single_to_do
+    apple = ToDo.create!(description: "Apples")
+    get "/todos/#{apple.id}"
+    assert_match(/Apple/, last_response.body)
+  end
 end
