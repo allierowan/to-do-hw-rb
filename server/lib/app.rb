@@ -16,6 +16,16 @@ class App < Sinatra::Base
     erb :"lists/index.html", layout: :"layout/application.html"
   end
 
+  get "/next" do
+    if !ToDo.where(is_complete: :false).empty?
+      @todo = ToDo.where(is_complete: :false).sample
+      redirect "/list/todos/#{@todo.id}"
+    else
+      @message = "Create some to dos!"
+      erb :"home/index.html", layout: :"layout/application.html"
+    end
+  end
+
   post "/lists" do
     @list = List.new(params)
     if @list.save
