@@ -11,21 +11,10 @@
     <link rel="stylesheet" href="/styles.css" media="screen">
   </head>
   <body>
-    <header>
-      <h1>What to do?</h1>
-    </header>
-    <article class="content">
-      <%= yield %>
-      <%= @message %>
-    </article>
-    <aside>
+    <aside class="col-md-2 sidebar-nav nav">
       <ul>
         <li><a href="/lists">All Lists</a></li>
-      </ul>
-      <ul>
         <li><a href="/next">Random To Do</a></li>
-      </ul>
-      <ul>
         <li>
           <form action="/search" method="get">
             <label for="search_bar">Search To Dos</label>
@@ -34,5 +23,12 @@
         </li>
       </ul>
     </aside>
+    <header>
+      <h1>What to do?</h1>
+    </header>
+    <article class="col-md-10 main_content">
+      <%= yield %>
+      <%= @message %>
+    </article>
   </body>
 </html>

@@ -1,62 +1,68 @@
 <h1>All To Dos</h1>
-<table class="table">
-  <tr>
-    <th>
-      Complete
-    </th>
-    <th>
-      List Name
-    </th>
-    <th>
-      Description
-    </th>
-    <th>
-      Due Date
-    </th>
-    <th>
-    </th>
-  </tr>
-  <% @todos.each do |to_do| %>
-  <tr>
-    <td>
-      <% if to_do.is_complete %>
-      <span class="complete">Completed on <%= to_do.completed_at.strftime "%A, %d %b %Y %l:%M %p" %></span>
-      <% else %>
-        <form action="/active/todos/<%= to_do.id %>" method="post">
-          <input type="hidden" name="_method" value="patch">
-          <input type="hidden" name="todo[is_complete]" value="<%= true %>">
-          <input type="hidden" name="all" value="<%= @all %>">
-          <input type="submit" value="Complete">
+<table class="table index">
+  <thead>
+    <tr>
+      <th>
+        Complete
+      </th>
+      <th>
+        List Name
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Due Date
+      </th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todos.each do |to_do| %>
+    <tr>
+      <td>
+        <% if to_do.is_complete %>
+        <span class="complete">Completed on <%= to_do.completed_at.strftime "%A, %d %b %Y %l:%M %p" %></span>
+        <% else %>
+          <form action="/active/todos/<%= to_do.id %>" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="todo[is_complete]" value="<%= true %>">
+            <input type="hidden" name="all" value="<%= @all %>">
+            <input type="submit" value="   " onfocus="this.value='✔'">
+          </form>
+        <% end %>
+      </td>
+      <td>
+        <a href="/lists/<%= List.find(to_do.list_id).name %>/active?id=<%= to_do.list_id %>"><%= to_do.list.name %></a>
+      </td>
+      <td>
+        <a href="/todos/<%= to_do.id %>"><%= to_do.description %></a>
+      </td>
+      <td>
+        <%= to_do.due_at.strftime "%A, %d %b %Y" if to_do.due_at %>
+      </td>
+      <td>
+        <form action="/todos/active/<%= to_do.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="all" value="<%= false %>">
+          <input type="submit" value="Delete">
         </form>
-      <% end %>
-    </td>
-    <td>
-      <a href="/lists/<%= List.find(to_do.list_id).name %>/active?id=<%= to_do.list_id %>"><%= to_do.list.name %></a>
-    </td>
-    <td>
-      <a href="/todos/<%= to_do.id %>"><%= to_do.description %></a>
-    </td>
-    <td>
-      <%= to_do.due_at.strftime "%A, %d %b %Y" if to_do.due_at %>
-    </td>
-    <td>
-      <form action="/todos/active/<%= to_do.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="all" value="<%= false %>">
-        <input type="submit" value="Delete">
-      </form>
-    </td>
-  </tr>
-  <% end %>
-  <tr>
-    <td>
-    </td>
-    <td>
-      <a href="/all/todos">See all</a>
-    </td>
-    <td>
-    </td>
-    <td>
-    </td>
-  </tr>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>
+      </td>
+      <td>
+        <a href="/all/todos">See all</a>
+      </td>
+      <td>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </tfoot>
 </table>

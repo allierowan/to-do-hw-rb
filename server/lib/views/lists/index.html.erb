@@ -1,34 +1,42 @@
 <h2>Your Lists</h2>
-<table class="table">
-  <th>
-    List Name
-  </th>
-  <th>
-  </th>
-  <% @lists.each do |list| %>
-  <tr>
-    <td>
-      <a href="/lists/<%=list.name%>/active?id=<%= list.id %>"><%= list.name %></a>
-    </td>
-    <td>
-      <form action="/lists/<%= list.name %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="id" value="<%= list.id %>">
-        <input type="submit" value="Delete">
-      </form>
-    </td>
-  </tr>
-  <% end %>
-  <tr>
-    <td>
-      <a href="/active/todos">See all to dos</a>
-    </td>
-    <td>
-    </td>
-  </tr>
+<table class="table index">
+  <thead>
+    <th>
+      List Name
+    </th>
+    <th>
+    </th>
+  </thead>
+  <tbody>
+    <% @lists.each do |list| %>
+    <tr>
+      <td>
+        <a href="/lists/<%=list.name%>/active?id=<%= list.id %>"><%= list.name %></a>
+      </td>
+      <td>
+        <form action="/lists/<%= list.name %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" value="<%= list.id %>">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>
+        <a href="/active/todos">See all to dos</a>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </tfoot>
 </table>
-<form action="/lists" method="post">
-  <label for="list_name">List Name</label>
-  <input id="list_name" type="text" name="name" value="">
-  <input type="submit" value="Save">
-</form>
+<article class="new_item_section">
+  <h5>Create a New List</h5>
+  <form action="/lists" method="post">
+    <input id="list_name" type="text" name="name" value="">
+    <input type="submit" value="Save">
+  </form>
+</article>

@@ -1,53 +1,78 @@
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: rgb(210, 210, 213);
+  background-color: #C2C1A5;
+}
+
+aside {
+  background-color: rgb(50, 51, 51);
+  padding-top: 50px;
+  height: 1000px;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+input {
+  color: #27332B;
+}
+
+input:focus {
+  value: "clicked";
+}
+
+table.index tbody > tr {
+  background-color: #515751;
+  color: #F5F9E9;
+}
+
+table.index tbody > tr:hover {
+  background-color: #596869;
+}
+
+table.index tbody a:link {
+  color: #F5F9E9;
+}
+
+table.index tbody a:visited {
+  color: #F5F9E9;
+}
+
+a:link {
+  color: #27332B;
+}
+
+a:visited {
+  color: #27332B;
 }
 
 header {
-  background-color: rgba(56, 56, 56, 0.88);
-  color: rgb(240, 240, 241);
+  background-color: #36453B;
+  color: #F5F9E9;
   height: 50px;
   padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 h1 {
   font-weight: 100;
   margin: inherit;
   text-align: center;
-  padding-top: 4px;
   font-size: 40px;
 }
 
-article.content {
-  margin-left: 20%;
-  margin-right: 20%;
+article.main_content {
+  padding-right: 200px;
   margin-top: 20px;
-  margin-bottom: 20px;
-  padding-left: 10px;
-  padding-bottom: 10px;
 }
 
 ul.lists li {
   list-style-type: none;
   padding: 3px;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 ul.lists {
   padding-left: 5px;
-  text-align: center;
-}
-
-a:link {
-  text-decoration: none;
-  color: rgb(59, 59, 59);
-}
-
-a:hover {
-  text-decoration: underline;
-  color: rgb(125, 123, 123);
 }
 
 h2 {
@@ -55,6 +80,41 @@ h2 {
   font-size: 30px;
 }
 
-form {
-  text-align: center;
+.create_item_section {
+  margin: 20px;
+  padding: 10px;
+}
+
+.sidebar-nav li {
+  list-style-type: none;
+}
+
+.sidebar-nav li a:hover {
+  background-color: rgb(110, 121, 112);
+}
+
+.sidebar-nav ul {
+  padding: 0px;
+}
+
+.sidebar-nav {
+  color: #F5F9E9;
+}
+
+.sidebar-nav a:visited {
+  color: #F5F9E9;
+}
+
+.sidebar-nav {
+  color: #F5F9E9;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.sidebar-nav li form {
+  padding: 20px;
 }
