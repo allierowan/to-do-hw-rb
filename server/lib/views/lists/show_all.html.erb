@@ -8,6 +8,9 @@
       Description
     </th>
     <th>
+      Due Date
+    </th>
+    <th>
     </th>
   </tr>
   <% @list.to_dos.each do |to_do| %>
@@ -18,19 +21,31 @@
       <% else %>
       <form action="/todos/<%= to_do.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
-        <input type="hidden" name="todo[is_cosmplete]" value="<%= to_do.is_complete %>">
+        <input type="hidden" name="todo[is_complete]" value="<%= to_do.is_complete %>">
         <input type="submit" value="Complete">
+      </form>
       <% end %>
     </td>
     <td>
       <a href="/todos/<%= to_do.id %>"><%= to_do.description %></a>
     </td>
     <td>
-      <form action="/todos/<%= to_do.id %>" method="post">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="list_id" value="<%= @list.id %>">
-        <input type="submit" value="Delete">
-      </form>
+      <%= to_do.due_at.strftime "%A, %d %b %Y" if to_do.due_at %>
+    </td>
+    <td>
+      <% if @all %>
+        <form action="/todos/all/<%= to_do.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="list_id" value="<%= @list.id %>">
+          <input type="submit" value="Delete">
+        </form>
+      <% else %>
+        <form action="/todos/<%= to_do.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="list_id" value="<%= @list.id %>">
+          <input type="submit" value="Delete">
+        </form>
+      <% end %>
     </td>
   </tr>
   <% end %>

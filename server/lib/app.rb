@@ -80,7 +80,13 @@ class App < Sinatra::Base
     redirect "/lists/#{params['list_id']}"
   end
 
+  delete "/todos/all/:id" do
+    ToDo.find(params["id"]).destroy
+    redirect "/lists/#{params['list_id']}/all"
+  end
+
   get "/lists/:id/all" do
+    @all = true
     @list = List.find(params["id"])
     @todo = ToDo.new(list: @list)
     erb :"lists/show_all.html", layout: :"layout/application.html"
