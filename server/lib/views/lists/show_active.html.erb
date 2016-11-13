@@ -23,7 +23,7 @@
           <input type="hidden" name="_method" value="patch">
           <input type="hidden" name="todo[is_complete]" value="<%= true %>">
           <input type="hidden" name="list[name]" value="<%= @list.name %>">
-          <input type="submit" value="   " onfocus="this.value='✔'">
+          <input type="submit" class="checkbox" value="   " onfocus="this.value='✔'" class="checkbox">
         </form>
       </td>
       <td>
@@ -34,10 +34,10 @@
       </td>
       <td>
         <form action="/list/active/todos/<%= to_do.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="_method" value="Delete">
           <input type="hidden" name="list[id]" value="<%= @list.id %>">
           <input type="hidden" name="list[name]" value="<%= @list.name %>">
-          <input type="submit" value="Delete">
+          <input type="submit" class="btn btn-danger" value="Delete">
         </form>
       </td>
     </tr>

@@ -15,9 +15,9 @@
       </td>
       <td>
         <form action="/lists/<%= list.name %>" method="post">
-          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="_method" value="Delete">
           <input type="hidden" name="id" value="<%= list.id %>">
-          <input type="submit" value="Delete">
+          <input type="submit" class="btn btn-danger" class="btn btn-danger" value="Delete">
         </form>
       </td>
     </tr>
