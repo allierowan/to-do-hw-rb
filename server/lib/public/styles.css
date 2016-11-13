@@ -22,10 +22,14 @@ input[type="submit"] {
 
 input[type="submit"].checkbox {
   margin: 8px;
+  border-radius: 20px;
+  border: solid 2px rgb(200, 200, 200);
+  background-color: rgb(235, 235, 235);
+  color: rgb(210, 210, 210);
 }
 
-input:focus {
-  value: "clicked";
+input[type="submit"].checkbox:focus {
+  color: black;
 }
 
 table.index tbody tr td {
@@ -37,12 +41,12 @@ table.table tbody tr td {
   vertical-align: middle;
 }
 
-table.index tbody > tr {
+table.index tbody tr {
   background-color: #515751;
   color: #F5F9E9;
 }
 
-table.index tbody > tr:hover {
+table.index tbody tr:hover {
   background-color: #596869;
 }
 
