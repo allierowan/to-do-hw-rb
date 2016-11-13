@@ -15,16 +15,16 @@
       <h1>What to do?</h1>
     </header>
     <article class="content">
-      <%= @message %>
       <%= yield %>
+      <%= @message %>
     </article>
-    <article>
+    <aside>
       <ul>
         <li><a href="/lists">All Lists</a></li>
       </ul>
       <ul>
         <li><a href="/next">Random To Do</a></li>
       </ul>
-    </article>
+    </aside>
   </body>
 </html>

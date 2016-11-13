@@ -76,6 +76,16 @@ class App < Sinatra::Base
     erb :"todos/show.html", layout: :"layout/application.html"
   end
 
+  get "/todos/:id/update" do
+    @todo = ToDo.find(params["id"])
+    erb :"todos/edit.html", layout: :"layout/application.html"
+  end
+
+  get "/list/todos/:id/update" do
+    @todo = ToDo.find(params["id"])
+    erb :"todos/list_edit.html", layout: :"layout/application.html"
+  end
+
   patch "/list/active/todos/:id" do
     @todo = ToDo.find(params["id"])
     @todo.mark_complete! if params["todo"]["is_complete"]
