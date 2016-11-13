@@ -16,9 +16,9 @@
   <tr>
     <td>
       <% if @todo.is_complete %>
-      <span class="complete">Completed on <%= to_do.completed_at.strftime "%A, %d %b %Y %l:%M %p" %></span>
+      <span class="complete">Completed on <%= @todo.completed_at.strftime "%A, %d %b %Y %l:%M %p" %></span>
       <% else %>
-      <form action="/list/all/todos/<%= @todo.id %>" method="post">
+      <form action="/list/active/todos/<%= @todo.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="todo[is_complete]" value="<%= true %>">
         <input type="hidden" name="list[name]" value="<%= @todo.list.name %>">

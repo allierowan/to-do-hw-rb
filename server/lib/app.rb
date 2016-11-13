@@ -140,4 +140,9 @@ class App < Sinatra::Base
     @todo = ToDo.new(list: @list)
     erb :"lists/show_all.html", layout: :"layout/application.html"
   end
+
+  get "/search" do
+    @todos = ToDo.where("description LIKE ?", "%#{params['q']}")
+    erb :"todos/index_all.html", layout: :"layout/application.html"
+  end
 end
