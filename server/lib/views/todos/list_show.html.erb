@@ -9,9 +9,8 @@
   </tr>
   <tr>
     <td>
-      <form action="/all/todos/<%= @todo.id %>" method="post">
+      <form action="/list/active/todos/<%= @todo.id %>" method="post">
         <input type="hidden" name="_method" value="patch">
-
         <label for="todo_description">Description</label>
         <input id="todo_description" type="text" name="todo[description]" value="<%= @todo.description%>">
         <input type="hidden" name="list[name]" value="<%= @todo.list.name %>">

@@ -8,11 +8,12 @@
   <% @lists.each do |list| %>
   <tr>
     <td>
-      <a href="/lists/<%=list.id%>"><%= list.name %></a>
+      <a href="/lists/<%=list.name%>/active?id=<%= list.id %>"><%= list.name %></a>
     </td>
     <td>
-      <form action="/lists/<%= list.id %>" method="post">
+      <form action="/lists/<%= list.name %>" method="post">
         <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="id" value="<%= list.id %>">
         <input type="submit" value="Delete">
       </form>
     </td>
@@ -20,7 +21,7 @@
   <% end %>
   <tr>
     <td>
-      <a href="/todos">See all to dos</a>
+      <a href="/active/todos">See all to dos</a>
     </td>
     <td>
     </td>
